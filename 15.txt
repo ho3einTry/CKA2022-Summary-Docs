@@ -1,0 +1,1 @@
+show label of pod : kubectl get po --show-labels
