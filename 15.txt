@@ -1,1 +1,4 @@
 show label of pod : kubectl get po --show-labels
+set or append pod label : kubectl label pod [name of po] [key=value] #(like application=v1)
+overwrite pod label :  kubectl label --overwrite pod [name of po] [key=value] #(like application=v2)
+remove pod label : kubectl label pod [name of po] [key]- #(like application-) notice use "-" after key
