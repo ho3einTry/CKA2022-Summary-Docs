@@ -1,0 +1,50 @@
+expose pod :
+ClusterIP(default):  to exposing your pods / application internally
+#internaly in our network
+
+NodePort: x.x.x.x:32323 any ip from master or worker node
+#expose in out of our network
+
+LoadBalacer: x.x.x.x
+#expose in out of our network
+
+
+#diference between NodePort and LoadBalacer is port number
+
+Ingress: in video 25
+
+when create every file, you have to four things
+
+a=>apiVersion
+k=>kind
+m=>metadata
+s=> spec (specification)
+
+
+create Service:
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service # name of service
+spec: # details my service
+  selector:
+    app.kubernetes.io/name: MyApp #select app for routing
+  ports:
+    - protocol: TCP
+      port: 80 
+      targetPort: 9376 
+  type: LoadBalancer/NodePort/ClusterIP(default,if you don't put type default value is ClusterIP)
+
+      #A “port” refers to the container port exposed by a pod or deployment, 
+      #while a “targetPort” refers to the port on the host machine that traffic is directed to. 
+      #Let's look at example manifiest file of a service. In this example, 
+      #the service listens on port 8089 and the container listens on port 8080
+
+
+
+
+kubectl apply -f svc.yaml
+kubectl get svc/service
+kubectl edit svc [name of svc]
+
