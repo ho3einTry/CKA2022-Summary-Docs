@@ -1,0 +1,13 @@
+create pod : kubectl  run firstpod --image=nginx
+delete pod : kubectl delete pod [name of pod]
+delete pod : kubectl delete pod --all
+get pod : kubectl get pods/pod/po -o wide #(wide can be use for all command)
+get pod yaml file : kubectl get pod [name of pod] -o yaml
+
+all sortname and command kubectl :  kubectl api-resources
+
+
+get node : kubectl get nodes
+get node with wide : kubectl get nodes -o wide #(wide can be use for all command)
+
+
