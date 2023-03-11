@@ -1,0 +1,19 @@
+get all thing in our cluster like po/svc/rc, ... : kubectl get all
+
+delete rc : kubectl delete rc [name of ReplicationController]
+
+ReplicationController(rc)
+
+ReplicaSet(rs): 
+
+
+
+in rs unlike rc we can use multiple labels, 
+but in rc if you have multiple label use one of them (if have number use biggest one)
+
+https://www.linkedin.com/pulse/kubernetes-101-rc-vs-rs-wael-eldoamiry/
+
+video 18 and 19:  if you want delete pod you can't do it because rs care about that and it recreate it
+if you want to delete them you have to delete rs
+
+delete ReplicaSet: kubectl delete [name of ReplicaSet]

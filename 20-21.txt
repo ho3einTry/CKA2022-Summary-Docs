@@ -1,0 +1,60 @@
+ReplicaSet can't update without downtime, if we want to change it,
+should be delete rs and create new one 
+
+Deployment:
+
+Deployment create ReplicaSet and ReplicaSet create pods
+
+
+
+RollingUpdate:
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: nginx
+  minReadySeconds: 10 #New Pods become ready or available (ready for at least MinReadySeconds)
+  ​​strategy:  #this part is for upgrading your deployment
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+     —name: nginx
+        image: nginx:1.14.2
+        ports:
+       —containerPort: 80
+
+
+Max Unavailable :
+maxUnavailable is an optional field that specifies the maximum number of Pods that can be unavailable during the update process. 
+The value can be an absolute number (for example, 5) or a percentage of desired Pods (for example, 10%). 
+The absolute number is calculated from percentage by rounding down. 
+The value cannot be 0 if .spec.strategy.rollingUpdate.maxSurge is 0. The default value is 25%.
+
+
+
+Max Surge:
+maxSurge is an optional field that specifies the maximum number of Pods that can be created over the desired number of Pods. 
+The value can be an absolute number (for example, 5) or a percentage of desired Pods (for example, 10%). 
+The value cannot be 0 if MaxUnavailable is 0. The absolute 
+
+
+Note: 
+Kubernetes doesn't count terminating Pods when calculating the number of availableReplicas, 
+which must be between replicas - maxUnavailable and replicas + maxSurge. 
+As a result, you might notice that there are more Pods than expected during a rollout, 
+and that the total resources consumed by the Deployment is more than replicas + maxSurge until the terminationGracePeriodSeconds of the terminating Pods expires.
