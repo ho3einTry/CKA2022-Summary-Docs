@@ -1,0 +1,67 @@
+RollingBacks:
+
+    first solution: change deployment file and recreate it
+    second solution: change with below command 
+            kubectl set image [deployment names] [container names]=[new images names]
+    example:kubectl set image deployment.app/first-deployment nginx=httpd
+
+    third solution: 
+        1=>kubectl edit [deployment names]
+        2=>kubectl rollout status [deployment names]
+
+
+show deployment revision count and number: kubectl rollout history [deployment names]
+undo rollout deployment: kubectl rollout undo [deployment names] --to-revision=[number]
+
+
+Scaling a Deployment
+    You can scale a Deployment by using the following command:
+
+    kubectl scale deployment/nginx-deployment --replicas=10
+
+
+    kubectl autoscale deployment/nginx-deployment --min=10 --max=15 --cpu-percent=80
+
+
+CHANGE-CAUSE content for the current revision:
+    kubectl annotate deployments.apps my deployment kubernetes.io/change-cause="some causes"
+
+
+
+
+Checking Rollout History of a Deployment
+Follow the steps given below to check the rollout history:
+
+First, check the revisions of this Deployment:
+
+kubectl rollout history deployment/nginx-deployment
+The output is similar to this:
+
+deployments "nginx-deployment"
+REVISION    CHANGE-CAUSE
+1           kubectl apply --filename=https://k8s.io/examples/controllers/nginx-deployment.yaml
+2           kubectl set image deployment/nginx-deployment nginx=nginx:1.16.1
+3           kubectl set image deployment/nginx-deployment nginx=nginx:1.161
+
+CHANGE-CAUSE is copied from the Deployment annotation kubernetes.io/change-cause to its revisions upon creation. You can specify theCHANGE-CAUSE message by:
+
+Annotating the Deployment with kubectl annotate deployment/nginx-deployment kubernetes.io/change-cause="image updated to 1.16.1"
+Manually editing the manifest of the resource.
+To see the details of each revision, run:
+
+kubectl rollout history deployment/nginx-deployment --revision=2
+The output is similar to this:
+
+deployments "nginx-deployment" revision 2
+  Labels:       app=nginx
+          pod-template-hash=1159050644
+  Annotations:  kubernetes.io/change-cause=kubectl set image deployment/nginx-deployment nginx=nginx:1.16.1
+  Containers:
+   nginx:
+    Image:      nginx:1.16.1
+    Port:       80/TCP
+     QoS Tier:
+        cpu:      BestEffort
+        memory:   BestEffort
+    Environment Variables:      <none>
+  No volumes.
