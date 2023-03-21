@@ -1,0 +1,1 @@
+create new join token: kubeadm token create --print-join-command

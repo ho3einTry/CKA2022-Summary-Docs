@@ -1,0 +1,5 @@
+what do you do after removing ~/.kube/config:
+cp /etc/kubernetes/admin.conf ~/.kube/config
+what do you do after removing /etc/kubernetes/admin.conf:
+Regenerate the file: 
+kubeadm init phase kubeconfig admin --apiserver-advertise-address=192.168.1.150 --cert-dir /etc/kubernetes/pki
