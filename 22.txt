@@ -1,6 +1,6 @@
 RollingBacks:
 
-    first solution: change deployment file and recreate it
+    first solution: change deployment file and recreate it (not delete it)
     second solution: change with below command 
             kubectl set image [deployment names] [container names]=[new images names]
     example:kubectl set image deployment.app/first-deployment nginx=httpd
@@ -11,6 +11,7 @@ RollingBacks:
 
 
 show deployment revision count and number: kubectl rollout history [deployment names]
+See current revision number : you can see in describe deployment in Annotations part
 undo rollout deployment: kubectl rollout undo [deployment names] --to-revision=[number]
 
 
