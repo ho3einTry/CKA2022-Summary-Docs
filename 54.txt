@@ -1,0 +1,3 @@
+how to have multiple values and use them:
+    create another values file
+    helm install [name want chart] . -f [name of new values]

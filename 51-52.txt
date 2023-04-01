@@ -1,0 +1,16 @@
+Helm:
+
+Create Helm chart:
+    helm create [name of chart]
+Install Helm chart:
+    helm install [name want to have chart] . # current directory should be into chart created
+Show Helm Chart List:
+    helm list
+Delete Helm chart:
+    helm uninstall [name of chart]
+Debug or find error in helm chart:
+    helm lint
+or
+    helm template . # show all chart with value from values.yaml
+or
+    helm template . | kubectl apply -f -

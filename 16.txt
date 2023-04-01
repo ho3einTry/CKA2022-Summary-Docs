@@ -33,7 +33,8 @@ spec: # details my service
   ports:
     - protocol: TCP
       port: 80 
-      targetPort: 9376 
+      targetPort: 80 
+      nodePort : 32036
   type: LoadBalancer/NodePort/ClusterIP(default,if you don't put type default value is ClusterIP)
 
       #A “port” refers to the container port exposed by a pod or deployment, 
